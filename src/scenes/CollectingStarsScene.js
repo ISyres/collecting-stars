@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 var platforms
 var player
+var cursors
 
 export default class CollectingStarsScene extends Phaser.Scene {
     constructor() {
@@ -66,5 +67,29 @@ export default class CollectingStarsScene extends Phaser.Scene {
             frameRate: 10,
             repeat: -1,
         })
+
+        // Set player and platforms to collide
+        this.physics.add.collider(player, platforms)
+
+        // Create keyboard control
+        cursors = this.input.keyboard.createCursorKeys()
+    }
+
+    update() {
+        // Define keyboard control
+        if (cursors.left.isDown) {
+            player.setVelocityX(-160)
+            player.anims.play('left', true)
+        } else if (cursors.right.isDown) {
+            player.setVelocityX(160)
+            player.anims.play('right', true)
+        } else {
+            player.setVelocityX(0)
+            player.anims.play('turn')
+        }
+
+        if (cursors.up.isDown) {
+            player.setVelocityY(-250)
+        }
     }
 }
