@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 var platforms
 var player
 var cursors
+var stars
 
 export default class CollectingStarsScene extends Phaser.Scene {
     constructor() {
@@ -23,7 +24,6 @@ export default class CollectingStarsScene extends Phaser.Scene {
     create() {
         // displaying star and sky
         this.add.image(400, 300, 'sky')
-        this.add.image(400, 300, 'star')
 
         // displaying platforms
         platforms = this.physics.add.staticGroup()
@@ -73,6 +73,20 @@ export default class CollectingStarsScene extends Phaser.Scene {
 
         // Create keyboard control
         cursors = this.input.keyboard.createCursorKeys()
+
+        // Create falling stars
+        stars = this.physics.add.group({
+            key: 'star',
+            repeat: 11,
+            setXY: { x: 12, y: 0, stepX: 70 },
+        })
+
+        stars.children.iterate(function (child) {
+            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8))
+        })
+
+        // Set stars and playforms to collide
+        this.physics.add.collider(stars, platforms)
     }
 
     update() {
