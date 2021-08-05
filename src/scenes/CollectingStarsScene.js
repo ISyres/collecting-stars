@@ -124,6 +124,16 @@ export default class CollectingStarsScene extends Phaser.Scene {
         // Scoring
         score += 10
         scoreText.setText('score: ' + score)
+
+        if (stars.countActive(true) === 0) {
+            stars.children.iterate(function (child) {
+                var x =
+                    player.x < 400
+                        ? Phaser.Math.Between(400, 800)
+                        : Phaser.Math.Between(0, 400)
+                child.enableBody(true, x, 0, true, true)
+            })
+        }
     }
 
     hitBomb(player) {
