@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 
 var platforms
+var player
 
 export default class CollectingStarsScene extends Phaser.Scene {
     constructor() {
@@ -31,5 +32,10 @@ export default class CollectingStarsScene extends Phaser.Scene {
 
         // displaying ground
         platforms.create(400, 568, 'ground').setScale(2).refreshBody()
+
+        // creating player
+        player = this.physics.add.sprite(100, 450, 'dude')
+        player.setCollideWorldBounds(true)
+        player.setBounce(0.2)
     }
 }
