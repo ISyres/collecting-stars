@@ -16,5 +16,8 @@ export default class CollectingStarsScene extends Phaser.Scene {
         })
     }
 
-    create() {}
+    create() {
+        this.add.image(400, 300, 'sky')
+        this.add.image(400, 300, 'star')
+    }
 }
