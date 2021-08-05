@@ -131,6 +131,14 @@ export default class CollectingStarsScene extends Phaser.Scene {
         player.setTint(0xff0000)
         player.anims.play('turn')
         gameOver = true
+
+        // Make use of game over variable
+        if (gameOver) {
+            this.add.text(320, 240, 'GAME OVER', {
+                fontSize: '32px',
+                fill: 'red',
+            })
+        }
     }
 
     update() {
